@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO ROJO FF</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #100000;
+      color: white;
+      text-align: center;
+    }
+    header {
+      background: #e00000;
+      padding: 24px 12px;
+      box-shadow: 0 0 20px #ff0000;
+    }
+    h1 { margin: 0; font-size: 30px; }
+    main { padding: 22px 16px; }
+    .panel {
+      max-width: 420px;
+      margin: 15px auto;
+      padding: 20px;
+      background: #210606;
+      border: 1px solid #ff2424;
+      border-radius: 16px;
+    }
+    label { display: block; margin: 18px 0 8px; }
+    input[type="range"] { width: 100%; accent-color: red; }
+    .valor { color: #ff4444; font-weight: bold; }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #e00000;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    footer { padding: 20px; color: #aaa; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TODO ROJO FF</h1>
+    <p>MI PANEL GAMER</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Panel de ajustes</h2>
+      <p>Personaliza tus preferencias.</p>
+
+      <label for="general">Sensibilidad general:
+        <span class="valor" id="vGeneral">150</span>
+      </label>
+      <input id="general" type="range" min="0" max="200" value="150">
+
+      <label for="mira">Punto rojo:
+        <span class="valor" id="vMira">140</span>
+      </label>
+      <input id="mira" type="range" min="0" max="200" value="140">
+
+      <label for="dos">Mira 2x:
+        <span class="valor" id="vDos">130</span>
+      </label>
+      <input id="dos" type="range" min="0" max="200" value="130">
+
+      <label for="cuatro">Mira 4x:
+        <span class="valor" id="vCuatro">120</span>
+      </label>
+      <input id="cuatro" type="range" min="0" max="200" value="120">
+
+      <button id="guardar">Guardar mis preferencias</button>
+      <p id="mensaje" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>TODO ROJO FF · Herramienta de preferencias</footer>
+
+  <script>
+    const controles = [
+      ["general", "vGeneral"],
+      ["mira", "vMira"],
+      ["dos", "vDos"],
+      ["cuatro", "vCuatro"]
+    ];
+
+    controles.forEach(([control, valor]) => {
+      document.getElementById(control).addEventListener("input", event => {
+        document.getElementById(valor).textContent = event.target.value;
+      });
+    });
+
+    document.getElementById("guardar").addEventListener("click", () => {
+      const preferencias = {};
+      controles.forEach(([control]) => {
+        preferencias[control] = document.getElementById(control).value;
+      });
+      try {
+        localStorage.setItem("todoRojoFF", JSON.stringify(preferencias));
+        document.getElementById("mensaje").textContent =
+          "¡Preferencias guardadas en este dispositivo!";
+      } catch {
+        document.getElementById("mensaje").textContent =
+          "No se pudieron guardar las preferencias en este navegador.";
+      }
+    });
+  </script>
+</body>
+        </html>o 
